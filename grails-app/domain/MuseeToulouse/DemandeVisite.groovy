@@ -6,8 +6,9 @@ class DemandeVisite {
     Date dateDebutPeriode
     Date dateFinPeriode
     int nbPersonnes
-    Status statut
+    String statut
 
     static constraints = {
+
     }
 }
