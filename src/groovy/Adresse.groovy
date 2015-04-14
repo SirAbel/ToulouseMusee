@@ -7,9 +7,6 @@ class Adresse {
     Integer codePostal
     String ville
 
-    static belongsTo = [
-            musee : Musee
-    ]
 
     static constraints = {
 
@@ -17,7 +14,12 @@ class Adresse {
         rue blank: false
         codePostal min:10000, max: 99999
         ville blank: false
-        musee nullable: true
 
+    }
+
+
+    @Override
+    public String toString() {
+        return numero + ", " + rue + " - " + codePostal + ", " + ville
     }
 }

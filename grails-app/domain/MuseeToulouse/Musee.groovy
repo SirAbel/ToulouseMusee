@@ -10,6 +10,8 @@ class Musee {
     Gestionnaire gestionnaire
     Adresse adresse
 
+    static embedded = ['adresse']
+
     static constraints = {
 
         nom blank: false

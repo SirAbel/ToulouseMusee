@@ -12,4 +12,9 @@ class Gestionnaire {
         nom blank: false
         musees nullable: true
     }
+
+    @Override
+    public String toString() {
+        return "-" + nom + "-";
+    }
 }
