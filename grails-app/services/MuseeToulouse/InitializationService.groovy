@@ -30,10 +30,10 @@ class InitializationService {
             gestionnaire3 = new Gestionnaire(nom: 'Rose').save()
             gestionnaire4 = new Gestionnaire(nom: 'Bob').save()
 
-            adresse1 = new Adresse(numero: 3,rue: 'RUE DU JAPON',codePostal: 31400,ville: 'Toulouse')
+            adresse1 = new Adresse(numero: 3,rue: 'Boulevard Des Saints',codePostal: 31400,ville: 'Toulouse')
             adresse2 = new Adresse(numero: 13,rue: 'RUE DU JAPON',codePostal: 31400,ville: 'Toulouse')
-            adresse3 = new Adresse(numero: 25,rue: 'RUE DU JAPON',codePostal: 31400,ville: 'Toulouse')
-            adresse4 = new Adresse(numero: 40,rue: 'RUE DU JAPON',codePostal: 31400,ville: 'Toulouse')
+            adresse3 = new Adresse(numero: 25,rue: 'RUE DU JAPON',codePostal: 21400,ville: 'Toulouse')
+            adresse4 = new Adresse(numero: 40,rue: 'RUE DU JAPON',codePostal: 21400,ville: 'Toulouse')
 
 
             musee1 = new Musee(nom: 'musee1', horairesOuverture: 'matin et après-midi', telephone: "0624228601", accesMetro:'pas dacces',accesBus:'faut pas exagerer nn plus',adresse: adresse1)

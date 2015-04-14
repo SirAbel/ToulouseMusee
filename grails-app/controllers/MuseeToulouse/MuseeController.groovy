@@ -7,7 +7,14 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class MuseeController {
 
+    MuseeService museeService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+    def doSearchMuseum() {
+        def museesList = museeService.searchMusees(params.nom, params.adresse?.codePostal, params.adresse?.rue)
+        render(view: 'index', model: [museeInstanceList: museesList, museeInstanceCount: museesList.size()])
+    }
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
