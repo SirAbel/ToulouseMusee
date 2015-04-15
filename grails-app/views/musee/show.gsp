@@ -77,6 +77,17 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${museeInstance?.visiteRequests}">
+				<li class="fieldcontain">
+					<span id="visiteRequests-label" class="property-label"><g:message code="musee.visiteRequests.label" default="Visite Requests" /></span>
+					
+						<g:each in="${museeInstance.visiteRequests}" var="v">
+						<span class="property-value" aria-labelledby="visiteRequests-label"><g:link controller="demandeVisiteMusee" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${museeInstance?.adresse}">
 				<li class="fieldcontain">
 					<span id="adresse-label" class="property-label"><g:message code="musee.adresse.label" default="Adresse" /></span>

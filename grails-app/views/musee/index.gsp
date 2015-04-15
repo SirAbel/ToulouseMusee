@@ -63,9 +63,9 @@
 						<g:sortableColumn property="nom" title="${message(code: 'musee.nom.label', default: 'Nom')}" />
 					
 						<th><g:message code="musee.gestionnaire.label" default="Gestionnaire" /></th>
-
+					
 						<g:sortableColumn property="horairesOuverture" title="${message(code: 'musee.horairesOuverture.label', default: 'Horaires Ouverture')}" />
-
+					
 						<g:sortableColumn property="telephone" title="${message(code: 'musee.telephone.label', default: 'Telephone')}" />
 					
 						<g:sortableColumn property="accesMetro" title="${message(code: 'musee.accesMetro.label', default: 'Acces Metro')}" />
@@ -95,7 +95,7 @@
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate  total="${museeInstanceCount}" max="5" />
+				<g:paginate total="${museeInstanceCount}" max="2" />
 			</div>
 		</div>
 	</body>

@@ -12,6 +12,7 @@ class GestionnaireControllerSpec extends Specification {
         assert params != null
         // TODO: Populate valid properties like...
         //params["name"] = 'someValidName'
+        params['nom'] = 'Abel'
     }
 
     void "Test the index action returns the correct model"() {

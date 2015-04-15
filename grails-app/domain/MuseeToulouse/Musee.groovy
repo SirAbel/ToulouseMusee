@@ -12,6 +12,10 @@ class Musee {
 
     static embedded = ['adresse']
 
+    static hasMany = [
+            visiteRequests : DemandeVisiteMusee
+    ]
+
     static constraints = {
 
         nom blank: false
@@ -22,6 +26,7 @@ class Musee {
         }
         accesMetro blank: false
         accesBus blank: false
+        visiteRequests nullable: true
 
     }
 }

@@ -2,8 +2,14 @@ package MuseeToulouse
 
 class DemandeVisiteMusee {
 
-    String DateDemande
+    Date dateDemande
 
     static constraints = {
+
+        dateDemande min: new Date()
     }
+
+    static belongsTo = [
+            musee:Musee, demandeVisite : DemandeVisite
+    ]
 }

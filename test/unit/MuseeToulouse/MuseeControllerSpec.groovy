@@ -12,6 +12,14 @@ class MuseeControllerSpec extends Specification {
         assert params != null
         // TODO: Populate valid properties like...
         //params["name"] = 'someValidName'
+        params['nom'] = 'mS1'
+        params['horairesOuverture'] = 'fsdfs'
+        params['telephone'] = '0988'
+        params['accesMetro'] = 'dsfsd'
+        params['accesBus'] = 'sfdsf'
+        params['gestionnaire'] = null
+        params['adresse'] = new Adresse(numero: 48, rue: "rue du pouset",
+                codePostal: 72000, ville: "Paris")
     }
 
     void "Test the index action returns the correct model"() {

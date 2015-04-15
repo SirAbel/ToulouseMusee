@@ -55,6 +55,24 @@
 	<g:textField name="accesBus" required="" value="${museeInstance?.accesBus}"/>
 
 </div>
+
+<div class="fieldcontain ${hasErrors(bean: museeInstance, field: 'visiteRequests', 'error')} ">
+	<label for="visiteRequests">
+		<g:message code="musee.visiteRequests.label" default="Visite Requests" />
+		
+	</label>
+	
+<ul class="one-to-many">
+<g:each in="${museeInstance?.visiteRequests?}" var="v">
+    <li><g:link controller="demandeVisiteMusee" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="demandeVisiteMusee" action="create" params="['musee.id': museeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'demandeVisiteMusee.label', default: 'DemandeVisiteMusee')])}</g:link>
+</li>
+</ul>
+
+
+</div>
 <fieldset class="embedded"><legend><g:message code="musee.adresse.label" default="Adresse" /></legend>
 <div class="fieldcontain ${hasErrors(bean: museeInstance, field: 'adresse.codePostal', 'error')} required">
 	<label for="adresse.codePostal">
