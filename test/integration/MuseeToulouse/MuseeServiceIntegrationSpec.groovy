@@ -81,7 +81,7 @@ class MuseeServiceIntegrationSpec extends Specification {
         res*.id.contains(initializationService.musee4.id)
 
         when:"on cherche les musées avec un code postal = 31400"
-        res = museeService.searchMusees(null,31400,null)
+        res = museeService.searchMusees(null,"31400",null)
 
         then:"on a 2 match musee1 et musee2"
         res.size() == 2

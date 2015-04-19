@@ -5,6 +5,7 @@ import grails.transaction.Transactional
 @Transactional
 class MuseeService {
 
+    List<Musee> favorites = new ArrayList<Musee>();
 
     Musee insertOrUpdateMusee(Musee unMusee, Gestionnaire unGestionnaire) {
 
@@ -15,29 +16,45 @@ class MuseeService {
 
     }
 
+    //marche quand utilisé dans les test
+    //d'integration mais pas depuis le controlleur
     void deleteMusee(Musee unMusee) {
-        unMusee.delete()
+        unMusee.delete(flush: true)
     }
 
-
-    List<Musee> searchMusees(String nomMusee, Integer codePostalMusee, String rueMusee) {
+    List<Musee> searchMusees(String nomMusee, String codePostalMusee, String rueMusee) {
         def criteria = Musee.createCriteria()
-        List<Musee> result = criteria.list {
+        List<Musee> result = criteria.list() {
             if (nomMusee) {
 
-                like 'nom', "%${nomMusee}%"
+                ilike 'nom', "%${nomMusee}%"
             }
-            if (codePostalMusee) {
-
-                eq 'adresse.codePostal', codePostalMusee
+            if (codePostalMusee && codePostalMusee !='0') {
+                def codePostal = Integer.parseInt(codePostalMusee)
+                eq 'adresse.codePostal', codePostal
             }
             if (rueMusee) {
 
-                like 'adresse.rue', "%${rueMusee}%"
+                ilike 'adresse.rue', "%${rueMusee}%"
             }
 
             order('nom')
         }
         result
     }
+
+    void removefavorite(String name) {
+        for(int i=0;i<favorites.size();i++) {
+            def elem = favorites.get(i)
+            if( elem.getNom() == name) {
+                favorites.remove(elem)
+            }
+        }
+    }
+
+    void addFavorite(Musee instance) {
+        favorites.add(instance)
+    }
+
+
 }

@@ -8,6 +8,10 @@ import spock.lang.*
 @Mock(Musee)
 class MuseeControllerSpec extends Specification {
 
+    def setup() {
+        controller.museeService = new MuseeService()
+    }
+
     def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
