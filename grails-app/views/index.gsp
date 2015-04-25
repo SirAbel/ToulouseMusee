@@ -1,3 +1,4 @@
+<%@ page import="MuseeToulouse.MuseeService" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,10 +7,9 @@
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
-				border: .2em solid #fff;
+				border: 3px solid #fff;
 				margin: 2em 2em 1em;
 				padding: 1em;
-				width: 12em;
 				float: left;
 				-moz-box-shadow: 0px 0px 1.25em #ccc;
 				-webkit-box-shadow: 0px 0px 1.25em #ccc;
@@ -17,6 +17,8 @@
 				-moz-border-radius: 0.6em;
 				-webkit-border-radius: 0.6em;
 				border-radius: 0.6em;
+				width: 90%;
+				text-align: center;
 			}
 
 			.ie6 #status {
@@ -38,10 +40,6 @@
 				text-transform: uppercase;
 				font-size: 1.1em;
 				margin: 0 0 0.3em;
-			}
-
-			#page-body {
-				margin: 2em 1em 1.25em 18em;
 			}
 
 			h2 {
@@ -78,22 +76,35 @@
 					margin-top: 0;
 				}
 			}
+
+			body {
+				margin: 0 auto;
+			}
+
+
+
 		</style>
 	</head>
 	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
 
-			<ul>
+	<div class="container">
+
+		<div id="status" role="complementary" >
+
+			<ul class="nav nav-pills nav-stacked">
 				<li>
-					<g:link controller="musee" action="index" >List Available Museums</g:link>
+					<g:link class="btn btn-default" controller="musee" action="index" >Browse Available Museums</g:link>
 				</li>
+
 				<li>
-					<g:link controller="musee" action="index" >Search Page</g:link>
+					<g:link class="btn btn-primary" controller="musee" action="doSearchMuseum" params="[var:1, accueil:1]" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search Page</g:link>
 				</li>
 			</ul>
 
 		</div>
+
+	</div>
+
 
 	</body>
 </html>

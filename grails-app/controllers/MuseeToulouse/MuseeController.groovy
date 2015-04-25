@@ -12,37 +12,62 @@ class MuseeController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def doSearchMuseum() {
-        def museesList =
-                museeService.searchMusees(params.nom, params.CP, params.rue)
-        museeService.favorites.clear()
-        render(view: 'index', model: [museeInstanceList: museesList,
+        if(params.var) {
+            museeService.favorites.clear()
+        }
+
+        def favorites = museeService.favorites
+        def museesList = []
+        if(!params.accueil) {
+            museesList = museeService.searchMusees(params.nom, params.CP, params.rue)
+            museesList = museeService.filtreFavorites(museesList)
+        }
+        render(view: 'search', model: [favoriteList: favorites,
+                                       favoriteListCount: favorites.size(),
+                                       museeInstanceList: museesList,
                                       museeInstanceCount: museesList.size()])
     }
 
-    def removeFromFavorite() {
-        params.max = 5
-        museeService.removefavorite(params.instance)
+    def paginatedResults() {
+        params.paginate = Integer.parseInt(params.paginate)
         def favorites = museeService.favorites
-        render(view: 'index', model: [favoriteList: favorites,
+        List<Musee> museesList = museeService.reconstructList(params.museeInstanceList,"none")
+        render(view: params.view, model: [favoriteList: favorites,
+                                          favoriteListCount: favorites.size(),
+                                          museeInstanceList: museesList,
+                                          museeInstanceCount: museesList.size()])
+    }
+
+    def removeFromFavorite() {
+        museeService.removefavorite(params.instance)
+        def instance = museeService.searchMusees(params.instance,null,null)
+        List<Musee> museesList = museeService.reconstructList(params.museeInstanceList,params.instance)
+        museesList.add(instance.get(0))
+        museesList.sort{a,b->a.getId()<=>b.getId()}
+        def favorites = museeService.favorites
+        render(view: params.view, model: [favoriteList: favorites,
                                       favoriteListCount: favorites.size(),
-                                      museeInstanceList: Musee.list(params),
-                                      museeInstanceCount: Musee.count])
+                                      museeInstanceList: museesList,
+                                      museeInstanceCount: museesList.size()])
     }
 
     def selectFavorite() {
-        params.max = 5
         def instance = museeService.searchMusees(params.instance,null,null)
         museeService.addFavorite(instance.get(0))
+        List<Musee> museesList = museeService.reconstructList(params.museeInstanceList,params.instance)
         def favorites = museeService.favorites
-        render(view: 'index', model: [favoriteList: favorites,
+        render(view: params.view, model: [favoriteList: favorites,
                                       favoriteListCount: favorites.size(),
-                                      museeInstanceList: Musee.list(params),
-                                      museeInstanceCount: Musee.count])
+                                      museeInstanceList: museesList,
+                                      museeInstanceCount: museesList.size()])
     }
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 5, 100)
-        respond Musee.list(params), model: [museeInstanceCount: Musee.count()]
+        def favorites = museeService.favorites
+        museeService.favorites.clear()
+        respond Musee.list(params), model: [museeInstanceCount: Musee.count(),
+                                            favoriteList: favorites,
+                                            favoriteListCount: favorites.size()]
     }
 
     def show(Musee museeInstance) {

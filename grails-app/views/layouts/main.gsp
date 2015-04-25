@@ -17,9 +17,16 @@
 		<g:layoutHead/>
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><asset:image src="logo.png" alt="Musees Toulouse"/></a></div>
+		<nav class="navbar navbar-default" id="mainHeader">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<asset:image src="logo.png" alt="Musees Toulouse"/>
+				</div>
+			</div>
+		</nav>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
+
 	</body>
 </html>

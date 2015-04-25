@@ -21,9 +21,7 @@ class Musee {
         nom blank: false
         gestionnaire nullable: true
         horairesOuverture blank: false
-        telephone blank: false, validator: {
-            it.matches("[0-9]+")
-        }
+        telephone blank: false
         accesMetro blank: false
         accesBus blank: false
         visiteRequests nullable: true

@@ -20,17 +20,17 @@ class InitializationServiceIntegrationSpec extends Specification {
         when: "On insert de nouvelles entées"
         initializationService.populateDB()
 
-        then: "4 nouvelle entrée ont été ajoutées"
-        Musee.count() == 4
+        then: "12 nouvelle entrée ont été ajoutées"
+        Musee.count() == 12
 
 
-        when: " la BD est contient 4 élements"
-        Musee.count() == 4
+        when: " la BD contient 12 élements"
+        Musee.count() == 12
 
         and: "on essai de réinserer les mêmes élements"
         initializationService.populateDB()
 
         then: "aucun nouvel elem n'est ajouté"
-        Musee.count() == 4
+        Musee.count() == 12
     }
 }
