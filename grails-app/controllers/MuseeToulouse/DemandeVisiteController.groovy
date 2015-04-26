@@ -45,10 +45,17 @@ class DemandeVisiteController {
 
 
         demandeVisiteInstance.save flush: true
-        DemandeVisiteMusee demandeVisite = new DemandeVisiteMusee(dateDemande: new Date(),musee: Musee.findByNom(params.instance),demandeVisite: demandeVisiteInstance)
-        demandeVisiteInstance.addToMuseumsRequested(demandeVisite)
-        Musee.findByNom(params.instance).addToVisiteRequests(demandeVisite)
-        demandeVisite.save(flush: true)
+
+        if(params.instance) {
+            def unMusee = Musee.findByNom(params.instance)
+            DemandeVisiteMusee demandeVisite = new DemandeVisiteMusee(dateDemande: new GregorianCalendar(2015,
+                    Calendar.DECEMBER, 28).time,
+                    musee: unMusee,
+                    demandeVisite: demandeVisiteInstance).save(flush: true)
+            demandeVisiteInstance.addToMuseumsRequested(demandeVisite)
+            unMusee.addToVisiteRequests(demandeVisite)
+
+        }
 
 
         request.withFormat {

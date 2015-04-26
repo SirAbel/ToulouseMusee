@@ -3,15 +3,23 @@ package MuseeToulouse
 
 import grails.test.mixin.*
 import spock.lang.*
+import sun.util.calendar.Gregorian
 
 @TestFor(DemandeVisiteController)
 @Mock(DemandeVisite)
 class DemandeVisiteControllerSpec extends Specification {
 
+
     def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
         //params["name"] = 'someValidName'
+        params["code"] = 35
+        params["dateDebutPeriode"] = new GregorianCalendar(2015, Calendar.DECEMBER, 28).time
+        params["dateFinPeriode"] = new GregorianCalendar(2015, Calendar.DECEMBER, 31).time
+        params["nbPersonnes"] = 4
+        params["statut"] = 'Pending'
+
     }
 
     void "Test the index action returns the correct model"() {
