@@ -125,5 +125,6 @@
 		</div>
 	</div>
 
+	<footer style="height: 40px;"></footer>
 	</body>
 </html>

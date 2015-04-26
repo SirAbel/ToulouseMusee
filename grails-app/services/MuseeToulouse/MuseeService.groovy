@@ -4,6 +4,7 @@ import grails.transaction.Transactional
 @Transactional
 class MuseeService {
 
+
     List<Musee> favorites = new ArrayList<Musee>();
 
     Musee insertOrUpdateMusee(Musee unMusee, Gestionnaire unGestionnaire) {
@@ -37,6 +38,7 @@ class MuseeService {
             }
 
             order('nom')
+            //join 'gestionnaire'
         }
         result
     }

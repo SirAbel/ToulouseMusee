@@ -2,41 +2,41 @@
 <%@ page import="MuseeToulouse.Musee" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'musee.label', default: 'Musee')}" />
-    <title><g:message code="default.list.label" args="[entityName]" /></title>
-    <style>
+    <head>
+        <meta name="layout" content="main">
+        <g:set var="entityName" value="${message(code: 'musee.label', default: 'Musee')}" />
+        <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <style>
 
 
-    .favBtn {
-        horizontal-align: middle;
-        display: block;
-        margin:auto
-    }
+            .favBtn {
+                horizontal-align: middle;
+                display: block;
+                margin:auto
+            }
 
-    table {
-        box-shadow: 0px 10px 5px #888888;
-        margin-top: 30px !important;
-    }
+            table {
+                box-shadow: 0px 10px 5px #888888;
+                margin-top: 30px !important;
+            }
 
-        .toHide {
-            display: none;
-        }
-    </style>
-</head>
-<body>
+            .toHide {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
 
-<nav class="navbar navbar-default navigationBar">
-    <a class="navbar-link" href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <g:message code="default.home.label"/></a>
-</nav>
+    <nav class="navbar navbar-default navigationBar">
+        <a class="navbar-link" href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <g:message code="default.home.label"/></a>
+    </nav>
 
-<div class="container" style="background-color: #F7F7F9;">
-    <div id="list-musee" class="content scaffold-list" role="main">
-        <h1 class="text-center"><g:message code="default.list.label" args="[entityName]" /></h1>
-        <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-        </g:if>
+    <div class="container" style="background-color: #F7F7F9;">
+        <div id="list-musee" class="content scaffold-list" role="main">
+            <h1 class="text-center"><g:message code="default.list.label" args="[entityName]" /></h1>
+            <g:if test="${flash.message}">
+                <div class="message" role="status">${flash.message}</div>
+            </g:if>
 
         <hr>
         <div class="container pull-left col-md-6">
@@ -84,6 +84,10 @@
                     <thead>
                     <tr>
                         <th>Favorites</th>
+                        <th><g:form>
+                            <g:hiddenField name="favoriteList" value="${favoriteList}"></g:hiddenField>
+                            <g:actionSubmit  class="btn btn-info btn-xs" action="redirectToDemandeVisite" value="Faire une demande" /></g:form>
+                        </th>
                     </tr>
                     <tr>
                         <g:sortableColumn property="nom" title="${message(code: 'musee.nom.label', default: 'Nom')}" />
@@ -165,8 +169,12 @@
 
         <g:if test="${museeInstanceCount > 5}">
             <ul class="pager">
-                <li class="previous"><a href="${createLink(uri: '/musee/paginatedResults',params:[museeInstanceList:museeInstanceList,view:'search',paginate:downward])}">Previous</a></li>
-                <li class="next"><a href="${createLink(uri: '/musee/paginatedResults',params:[museeInstanceList:museeInstanceList,view:'search',paginate:upwardMax])}">Next</a></li>
+                <g:if test="${downward >= 0}">
+                    <li class="previous"><a href="${createLink(uri: '/musee/paginatedResults',params:[museeInstanceList:museeInstanceList,view:'search',paginate:downward])}">Previous</a></li>
+                </g:if>
+                <g:if test="${upwardMax <= museeInstanceCount}">
+                    <li class="next"><a href="${createLink(uri: '/musee/paginatedResults',params:[museeInstanceList:museeInstanceList,view:'search',paginate:upwardMax])}">Next</a></li>
+                </g:if>
             </ul>
         </g:if>
 
@@ -176,7 +184,8 @@
         </div>-->
 
     </div>
-</div>
+    </div>
 
-</body>
+    <footer style="height: 40px;"></footer>
+    </body>
 </html>

@@ -38,6 +38,10 @@ class MuseeController {
                                           museeInstanceCount: museesList.size()])
     }
 
+    def redirectToDemandeVisite() {
+        redirect (controller: 'demandeVisite', action: 'redirectedCreation',params: [favoriteList: params.favoriteList])
+    }
+
     def removeFromFavorite() {
         museeService.removefavorite(params.instance)
         def instance = museeService.searchMusees(params.instance,null,null)

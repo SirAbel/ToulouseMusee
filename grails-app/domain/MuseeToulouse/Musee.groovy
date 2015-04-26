@@ -27,4 +27,8 @@ class Musee {
         visiteRequests nullable: true
 
     }
+
+    static mapping = {
+        gestionnaire fetch: 'join'
+    }
 }

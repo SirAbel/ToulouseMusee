@@ -18,4 +18,7 @@ if (typeof jQuery !== 'undefined') {
 			$(this).fadeOut();
 		});
 	})(jQuery);
+
+	document.getElementsByClassName('next').style.display = 'none';
+
 }
