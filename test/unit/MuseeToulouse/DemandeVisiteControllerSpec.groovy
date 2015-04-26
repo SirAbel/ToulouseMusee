@@ -6,8 +6,10 @@ import spock.lang.*
 import sun.util.calendar.Gregorian
 
 @TestFor(DemandeVisiteController)
-@Mock(DemandeVisite)
+@Mock([DemandeVisite,DemandeVisiteService])
 class DemandeVisiteControllerSpec extends Specification {
+
+    //DemandeVisiteService demandeVisiteService = new DemandeVisiteService()
 
 
     def populateValidParams(params) {
@@ -31,6 +33,22 @@ class DemandeVisiteControllerSpec extends Specification {
         !model.demandeVisiteInstanceList
         model.demandeVisiteInstanceCount == 0
     }
+
+    /*
+    void "Test the redirectedCreation action returns the correct model"() {
+
+        given: "the service"
+        controller.demandeVisiteService = demandeVisiteService
+
+        when: "The index action is executed with the populated params"
+        controller.params.favoriteList = "[musee1: 1,musee2: 2]"
+        controller.redirectedCreation()
+
+        then: "The model is correct"
+        model.favorieList
+        model.favorieListCount == 2
+    }*/
+
 
     void "Test the create action returns the correct model"() {
         when: "The create action is executed"
